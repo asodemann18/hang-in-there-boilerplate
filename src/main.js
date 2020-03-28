@@ -10,6 +10,10 @@ var mainButton = document.querySelector('.show-main');
 var saveButton = document.querySelector('.show-saved');
 var savePage = document.querySelector('.saved-posters');
 var backToMainButton = document.querySelector('.back-to-main');
+var inputImage = document.querySelector('#poster-image-url');
+var inputTitle = document.querySelector('#poster-title');
+var inputQuote = document.querySelector('#poster-quote');
+var makePosterButton = document.querySelector('.make-poster');
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -124,6 +128,15 @@ formButton.addEventListener('click', formPoster);
 mainButton.addEventListener('click', takeMeBack);
 saveButton.addEventListener('click', showSaved);
 backToMainButton.addEventListener('click', showMain);
+makePosterButton.addEventListener('click', addImageArray);
+makePosterButton.addEventListener('click', addTitleArray);
+makePosterButton.addEventListener('click', addQuoteArray);
+makePosterButton.addEventListener('click', newInstance);
+makePosterButton.addEventListener('click', takeMeBack);
+makePosterButton.addEventListener('click', displayNewImage);
+makePosterButton.addEventListener('click', displayNewTitle);
+makePosterButton.addEventListener('click', displayNewQuote);
+
 
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
@@ -167,4 +180,41 @@ function showSaved() {
 function showMain() {
   savePage.classList.add('hidden');
   mainPage.classList.remove('hidden');
+}
+
+function addImageArray() {
+  images.push(inputImage.value);
+}
+
+function addTitleArray() {
+  titles.push(inputTitle.value);
+}
+
+function addQuoteArray() {
+  quotes.push(inputQuote.value);
+}
+
+function newInstance(event) {
+  event.preventDefault();
+  var newPoster = new Poster(inputImage.value, inputTitle.value, inputQuote.value);
+}
+
+function returnHome() {
+  makePoster.classList.add('hidden');
+  mainPage.classList.remove('hidden');
+}
+
+function displayNewImage() {
+  var lastImage = images[images.length - 1];
+  image.setAttribute('src', lastImage);
+}
+
+function displayNewTitle() {
+  var lastTitle = titles[titles.length - 1];
+  title.innerText = lastTitle;
+}
+
+function displayNewQuote() {
+  var lastQuote = quotes[quotes.length - 1];
+  quote.innerText = lastQuote;
 }
