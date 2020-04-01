@@ -1,7 +1,22 @@
-var image = document.querySelector('.poster-img');
-var title = document.querySelector('.poster-title');
-var quote = document.querySelector('.poster-quote');
-// we've provided you with some data to work with 👇
+
+var image = document.querySelector(".poster-img");
+var title = document.querySelector(".poster-title");
+var quote = document.querySelector(".poster-quote");
+var formButton = document.querySelector(".show-form");
+var makePoster = document.querySelector(".poster-form");
+var mainPage = document.querySelector(".main-poster");
+var mainButton = document.querySelector(".show-main");
+var showSavedButton = document.querySelector(".show-saved");
+var savePage = document.querySelector(".saved-posters");
+var backToMainButton = document.querySelector(".back-to-main");
+var inputImage = document.querySelector("#poster-image-url");
+var inputTitle = document.querySelector("#poster-title");
+var inputQuote = document.querySelector("#poster-quote");
+var makePosterButton = document.querySelector(".make-poster");
+var saveThisPosterButton = document.querySelector(".save-poster");
+var savedPostersGrid = document.querySelector(".saved-posters-grid");
+var showRandomButton = document.querySelector(".show-random");
+
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -20,7 +35,7 @@ var images = [
   "./assets/runner.jpg",
   "./assets/squirrel.jpg",
   "./assets/tiger.jpg",
-  "./assets/turtle.jpg"
+  "./assets/turtle.jpg",
 ];
 var titles = [
   "determination",
@@ -57,7 +72,7 @@ var titles = [
   "smile",
   "trust",
   "understanding",
-  "wisdom"
+  "wisdom",
 ];
 var quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
@@ -97,37 +112,129 @@ var quotes = [
   "If you have good thoughts they will shine out of your face like sunbeams and you will always look lovely.",
   "No matter what people tell you, words and ideas can change the world.",
   "Each person must live their life as a model for others.",
-  "A champion is defined not by their wins but by how they can recover when they fall."
+  "A champion is defined not by their wins but by how they can recover when they fall.",
 ];
-// var savedPosters = [
-//   makePoster(
-//     "https://i.giphy.com/media/5LU6ZcEGBbhVS/giphy.gif",
-//     "Optimism",
-//     "Keep a joyful heart!"
-//   )
-// ];
-// var currentPoster;
-// event listeners go here 👇
-image.addEventListener('load', getImage(images));
-title.addEventListener('load', getTitle(titles));
-quote.addEventListener('load', getQuote(quotes));
-// functions and event handlers go here 👇
-// (we've provided one for you to get you started)!
+
+var savedPosters = [];
+
+image.addEventListener("load", getImage(images));
+title.addEventListener("load", getTitle(titles));
+quote.addEventListener("load", getQuote(quotes));
+formButton.addEventListener("click", formPoster);
+mainButton.addEventListener("click", takeMeBack);
+showSavedButton.addEventListener("click", showSaved);
+backToMainButton.addEventListener("click", showMain);
+
+makePosterButton.addEventListener("click", addNewCustomPoster);
+makePosterButton.addEventListener("click", newInstance);
+makePosterButton.addEventListener("click", takeMeBack);
+makePosterButton.addEventListener("click", displayNewPoster);
+
+saveThisPosterButton.addEventListener("click", saveNewPoster);
+saveThisPosterButton.addEventListener("click", showSavedPoster);
+showRandomButton.addEventListener("click", getNewPoster);
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+
 function getImage(array) {
   var indexHolder = getRandomIndex(array);
   var newImage = array[indexHolder];
-  image.setAttribute('src', newImage);
+  image.setAttribute("src", newImage);
 }
+
 function getTitle(array) {
   var indexHolder = getRandomIndex(array);
   var newTitle = array[indexHolder];
   title.innerText = newTitle;
 }
+
 function getQuote(array) {
   var indexHolder = getRandomIndex(array);
   var newQuote = array[indexHolder];
+  quote.innerText = newQuote;
+}
+
+function formPoster() {
+  mainPage.classList.add("hidden");
+  makePoster.classList.remove("hidden");
+}
+
+function takeMeBack() {
+  makePoster.classList.add("hidden");
+  mainPage.classList.remove("hidden");
+}
+
+function showSaved() {
+  mainPage.classList.add("hidden");
+  savePage.classList.remove("hidden");
+}
+
+function showMain() {
+  savePage.classList.add("hidden");
+  mainPage.classList.remove("hidden");
+}
+function addNewCustomPoster() {
+  images.push(inputImage.value);
+  titles.push(inputTitle.value);
+  quotes.push(inputQuote.value);
+}
+
+function newInstance(event) {
+  event.preventDefault();
+  var newPoster = new Poster(inputImage.value, inputTitle.value, inputQuote.value);
+}
+
+function returnHome() {
+  makePoster.classList.add("hidden");
+  mainPage.classList.remove("hidden");
+}
+
+function displayNewPoster() {
+  var lastImage = images[images.length - 1];
+  image.setAttribute('src', lastImage);
+  var lastTitle = titles[titles.length - 1];
+  title.innerText = lastTitle;
+  var lastQuote = quotes[quotes.length - 1];
+  quote.innerText = lastQuote;
+}
+
+function saveNewPoster() {
+ var saveThisPoster = new Poster(image.getAttribute("src"), title.innerText, quote.innerText);
+   for(var i = 0; i < savedPosters.length; i++) {
+        var poster = savedPosters[i] ;
+        if(poster.imageURL === saveThisPoster.imageURL && poster.title === saveThisPoster.title && poster.quote === saveThisPoster.quote) {
+          return
+        }
+   }
+
+  savedPosters.push(saveThisPoster);
+}
+
+function showSavedPoster () {
+  savedPostersGrid.innerHTML = "";
+  for (var i = 0; i < savedPosters.length; i++) {
+    var imageUrlFromArray = savedPosters[i].imageURL;
+    var titleFromArray = savedPosters[i].title;
+    var quoteFromArray = savedPosters[i].quote;
+    var poster = `<article class = "mini-poster">
+                    <img src="${imageUrlFromArray}" alt="nothing to see here">
+                    <h2>${titleFromArray}</h2>
+                    <h4>${quoteFromArray}</h4>
+                  </article>`;
+  savedPostersGrid.insertAdjacentHTML("afterbegin", poster);
+  }
+}
+
+function getNewPoster() {
+  var indexHolderImage = getRandomIndex(images);
+  var indexHolderTitle = getRandomIndex(titles);
+  var indexHolderQuote = getRandomIndex(quotes);
+  var newImage = images[indexHolderImage];
+  var newTitle = titles[indexHolderTitle];
+  var newQuote = quotes[indexHolderQuote];
+  image.setAttribute("src", newImage);
+  title.innerText = newTitle;
   quote.innerText = newQuote;
 }
