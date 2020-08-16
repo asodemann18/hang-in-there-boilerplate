@@ -5,14 +5,6 @@
 ## About
 Create a website that allows a user to randomly view motivational posters, save the poster, and also have the ability to create their own poster.
 
-## Setup
-```bash
-git clone [file path]
-cd hang-in-there-boilerplate
-npm install
-open index.html
-```
-
 ## Project Goals
 * Write clean, DRY JavaScript to store our data
 * Use a provided class by creating object instances using the new keyword
@@ -21,9 +13,22 @@ open index.html
 * Begin to understand how to write effective, clean HTML & CSS
 * Use git collaboratively to complete the project (pull requests, merging, and code reviews);
 
+## In Action
+![video of site](http://g.recordit.co/z2KNDjtBYo.gif)
+
+## Setup
+View it [here](https://asodemann18.github.io/hang-in-there-boilerplate/).
+
+Download Instructions:
+```bash
+git clone [file path]
+cd hang-in-there-boilerplate
+npm install
+open index.html
+```
+
 ## Technologies Used
 * HTML & CSS
 * Javascript
 
-## In Action
-![video of site](http://g.recordit.co/z2KNDjtBYo.gif)
+
