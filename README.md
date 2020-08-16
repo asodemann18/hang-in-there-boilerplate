@@ -1,4 +1,4 @@
-# Hang In There
+# [Hang In There](https://asodemann18.github.io/hang-in-there-boilerplate/)
 
 ## Project By: [Alex Sodemann](https://github.com/asodemann18) and [Dustin LaDue](https://github.com/devladue)
 
