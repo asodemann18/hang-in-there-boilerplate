@@ -1,15 +1,17 @@
 # Hang In There
 
-## Contributors
-[Alex Sodemann](https://github.com/asodemann18) and [Dustin LaDue](https://github.com/devladue)
+## Project By: [Alex Sodemann](https://github.com/asodemann18) and [Dustin LaDue](https://github.com/devladue)
 
 ## About
-Our assignment was to create a website that allowed a user to randomly view motivational posters, save the poster, and also have the ability to create their own poster.
+Create a website that allows a user to randomly view motivational posters, save the poster, and also have the ability to create their own poster.
 
 ## Setup
-* Fork and clone down this repo
-* Change into the hang-in-there-boilerplate directory
-* Make any edits to the files to make the site your own
+```bash
+git clone [file path]
+cd hang-in-there-boilerplate
+npm install
+open index.html
+```
 
 ## Project Goals
 * Write clean, DRY JavaScript to store our data
@@ -24,4 +26,4 @@ Our assignment was to create a website that allowed a user to randomly view moti
 * Javascript
 
 ## In Action
-![video of site](http://g.recordit.co/aHSbdki6Gt.gif)
+![video of site](http://g.recordit.co/z2KNDjtBYo.gif)
